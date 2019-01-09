@@ -2,11 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 const knex = require('knex')
+const CatalogKnexSrc = require('../src/catalogKnexSrc')
+const catalogKnexSrc = new CatalogKnexSrc(knex)
 
 require('dotenv').config({silent:true})
 
 router.get('/', function(req, res, next) {
-    knex('catalog').select('Name', 'description')
+    catalogKnexSrc.getAll()
     .then((collection)=>{
         res.json(collection);
     })
