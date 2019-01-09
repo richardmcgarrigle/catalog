@@ -14,4 +14,11 @@ router.get('/', function(req, res, next) {
     })
 });
 
+router.get('/match', (req, res)=>{
+    catalogKnexSrc.getMatched(req.query.filter)
+    .then((collection)=>{
+        res.json(collection)
+    })
+})
+
 module.exports = router;
